@@ -1,6 +1,18 @@
 import React, { Component } from "react";
 
-class Counter extends Component {
+export interface Counter {
+  id: number,
+  value: number,
+}
+
+interface Props {
+  counter: Counter,
+  onIncrement: (counter: Counter) => void,
+  onDelete: (counterId: number) => void,
+  onDecrement: (counter: Counter) => void,
+}
+
+class CounterFC extends Component<Props> {
   render() {
     return (
       <div>
@@ -20,7 +32,7 @@ class Counter extends Component {
             <button
               className="btn btn-info m-2"
               onClick={() => this.props.onDecrement(this.props.counter)}
-              disabled={this.props.counter.value === 0 ? "disabled" : ""}
+              disabled={this.props.counter.value === 0}
             >
               <i className="fa fa-minus-circle" aria-hidden="true" />
             </button>
@@ -48,4 +60,4 @@ class Counter extends Component {
   };
 }
 
-export default Counter;
+export default CounterFC;

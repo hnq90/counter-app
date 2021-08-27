@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import Counters from "./components/counters";
+import { Counter } from './components/counter'
 
-class App extends Component {
+interface Props {}
+interface State {
+  counters: Counter[],
+}
+
+class App extends Component<Props, State> {
   state = {
     counters: [
       { id: 1, value: 0 },
@@ -12,7 +18,7 @@ class App extends Component {
     ]
   };
 
-  handleIncrement = counter => {
+  handleIncrement = (counter: Counter) => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
     counters[index] = { ...counters[index] };
@@ -20,7 +26,7 @@ class App extends Component {
     this.setState({ counters });
   };
 
-  handleDecrement = counter => {
+  handleDecrement = (counter: Counter) => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
     counters[index] = { ...counters[index] };
@@ -36,7 +42,7 @@ class App extends Component {
     this.setState({ counters });
   };
 
-  handleDelete = counterId => {
+  handleDelete = (counterId: number) => {
     const counters = this.state.counters.filter(c => c.id !== counterId);
     this.setState({ counters });
   };

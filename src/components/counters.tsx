@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import Counter from "./counter";
+import CounterFC, { Counter } from "./counter";
 
-class Counters extends Component {
+interface Props {
+  onReset: () => void,
+  onIncrement: (counter: Counter) => void,
+  onDelete: (counterId: number) => void,
+  onDecrement: (counter: Counter) => void,
+  counters: Counter[],
+  onRestart: () => void,
+}
+
+class Counters extends Component<Props> {
   render() {
     const {
       onReset,
@@ -16,19 +25,19 @@ class Counters extends Component {
         <button
           className="btn btn-success m-2"
           onClick={onReset}
-          disabled={counters.length === 0 ? "disabled" : ""}
+          disabled={counters.length === 0}
         >
           <i className="fa fa-refresh" aria-hidden="true" />
         </button>
         <button
           className="btn btn-primary m-2"
           onClick={onRestart}
-          disabled={counters.length !== 0 ? "disabled" : ""}
+          disabled={counters.length !== 0}
         >
           <i className="fa fa-recycle" aria-hidden="true" />
         </button>
         {counters.map(counter => (
-          <Counter
+          <CounterFC
             key={counter.id}
             counter={counter}
             onIncrement={onIncrement}

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 
 // Stateless Functional Component
 
-const NavBar = ({ totalCounters }) => {
+interface Props {
+  totalCounters: number
+}
+
+const NavBar: FC<Props> = ({ totalCounters }) => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="navbar-brand">
